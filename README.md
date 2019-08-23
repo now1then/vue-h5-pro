@@ -1,35 +1,34 @@
 # vue-h5-pro
-<<<<<<< HEAD
 
 基于@vue/CLI3构建的移动端h5项目模板
 
-## Project setup
+## 构建命令
+### 初始化依赖配置
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 开发环境 启动运行
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
+### 生产环境 打包构建
 ```
 yarn run build
+
+yarn build --report // 打包分析
 ```
 
-### Run your tests
+### 自动化测试
 ```
 yarn run test
 ```
 
-### Lints and fixes files
+### Lint检查并修复
 ```
 yarn run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-基于@vue/CLI3构建的移动端h5项目模板
->>>>>>> 4991a470cd34e3ba87b710d8015102f3b02ae39d
+### 配置参考
+See [CLI配置参考](https://cli.vuejs.org/zh/config/).

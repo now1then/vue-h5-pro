@@ -6,7 +6,6 @@ module.exports = {
       ]
     }]
   ],
-
   'plugins': [
     ['component', {
       'libraryName': 'mint-ui',

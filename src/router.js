@@ -1,16 +1,27 @@
+/**
+ * @description: 路由
+ * @author: nowThen
+ */
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Error from './views/error'
+const Hello = () => import(/* webpackChunkName: "apply" */ '@/views/hello');
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
+      name: 'hello',
+      component: Hello
+    },
+    {
+      path: '/home',
       name: 'home',
       component: Home
     },

@@ -1,9 +1,7 @@
 /**
  * @description: 定义过滤器模块
- * @Author: nowThen
- * @Date: 2019-08-19 18:19:27
+ * @author: nowThen
  */
-
 
 /**
  * Date 转化为指定格式的String<br>
@@ -112,14 +110,3 @@ export function formatTimeAgo(ms) {
     return (n < 10) ? '0' + n : n;
   }
 }
-
-
-// register global utility filters.
-const filters = {
-  formatDate,
-  formatTimeAgo
-};
-
-Object.keys(filters).forEach((key) => {
-  Vue.filter(key, filters[key]);
-});
