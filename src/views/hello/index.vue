@@ -1,60 +1,92 @@
 <template>
-  <div class="page page-hello">
+  <section class=" page-hello">
     <div class="page-content">
-      <!-- 静态资源路径写法事例 -->
-      <img src="~@/assets/images/logo.png">
-      <h1 v-text="msg"></h1>
-      <h2 >现在时间是：{{time}}</h2>
-      <div class="demo">
-        <h3 class="title">页面链接：</h3>
-        <ul>
-          <li v-for="item in routerList" :key="item.name" style="margin-bottom:10px">
-            <router-link :to="item.path" style="padding: 1px ;font-size: 20px;border-bottom: 1px solid green;">{{item.name}}</router-link>
-            <!-- <a :href="item.path" style="padding: 1px ;font-size: 20px;border-bottom: 1px solid green;">{{item.name}}</a> -->
+      <div class="msg-area common-msg-area">
+        <p class="msg-title" v-text="msg"></p>
+        <!-- <img src="~@/assets/images/logo.png"> -->
+        <div class="user-img"></div>
+        <h3 class="app-name">
+          vue-h5-pro
+          <i class="iconfont iconRN-recommend"></i>
+        </h3>
+        <p class="user-desc">欢迎访问本项目，本项目是基于@Vue/CLI3构建的移动端h5项目模板，内容持续完善...</p>
+        <p>你的支持是我前进最大的推力！</p>
+        <div class="icons-link">
+          <i class="iconfont iconRN-edit"></i>
+          <i class="iconfont iconRN-yuque"></i>
+          <i class="iconfont iconRN-git"></i>
+          <i class="iconfont iconRN-juejin"></i>
+        </div>
+        <h2 class="time-area">
+          现在时间是：
+          <show-time />
+        </h2>
+      </div>
+
+      <div class="common-msg-area urls-area">
+        <h3 class="title">项目页面链接：</h3>
+        <ul class="list-ul">
+          <li v-for="item in routerList" :key="item.name" class="list-li">
+            <router-link
+              :to="item.path"
+              class="url-link"
+            >{{(item.meta && item.meta.title) || item.name}}</router-link>
           </li>
         </ul>
       </div>
+      <main-button btn-text="确定" :btn-disabled="false" @handle-click="handleNext" />
     </div>
-  </div>
+    <base-tip v-model="tip.show" :text="tip.text" :type="tip.type" />
+  </section>
 </template>
 
 <script type="text/babel">
-// 工具类
-import { formatDate } from '@/utils/cloud-utils';
+import ShowTime from '@/component_modules/ShowTime';
+import MainButton from '@/component_basics/MainButton';
+import BaseTip from '@/component_basics/BaseTip';
 // 组件
 export default {
+  name: 'page-hello',
   components: {
+    ShowTime,
+    MainButton,
+    BaseTip
   },
   data() {
     return {
-      msg: '欢迎进入测试页面',
-      time: formatDate(Date.now()),
+      tip: {
+        show: false,
+        text: '欢迎多多点击！',
+        type: 'success'
+      },
+      msg: '欢迎访问!',
       start: false,
       routerList: [],
-      interval_timer: null,
-    }
+      interval_timer: null
+    };
   },
   created() {
-    console.log(this);
-    this.init();
-    this.routerList = this.$router.options.routes.filter((item) => item.path !== this.$route.path);
-  },
-  beforeDestroy() {
-    this.interval_timer && clearInterval(this.interval_timer);
+    this.routerList = this.$router.options.routes.filter(
+      item => item.path !== this.$route.path
+    );
   },
   methods: {
-    init() {
-      this.interval_timer = setInterval(() => {
-        this.time = formatDate(Date.now());
-      }, 1000)
+    handleNext() {
+      const types = [
+        { type: 'info', text: '欢迎多多点击！' },
+        { type: 'success', text: '恭喜点击成功了！' },
+        { type: 'warning', text: '警告，警告...' },
+        { type: 'error', text: '错误提示：点击次数超限！' }
+      ];
+      const random = Math.floor(Math.random() * 4);
+      this.tip.show = true;
+      this.tip.text = types[random].text;
+      this.tip.type = types[random].type;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="less" rel="stylesheet/less" >
-  @import "./style.less";
-  .page-hello .title {
-    font-size: 40PX;
-  }
+@import './style.less';
 </style>

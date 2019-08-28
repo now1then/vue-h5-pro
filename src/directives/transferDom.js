@@ -23,7 +23,7 @@ function getTarget (node) {
 }
 
 const directive = {
-  inserted (el, {value}, vnode) {
+  inserted (el, { value }, vnode) {
     // transfer属性为空，则不移动组件；
     if (el.dataset.transfer !== 'true') {
       return false
@@ -51,7 +51,7 @@ const directive = {
       }
     }
   },
-  componentUpdated (el, {value}) {
+  componentUpdated (el, { value }) {
     if (el.dataset.transfer !== 'true') return false
     // need to make sure children are done updating (vs. `update`)
     const ref$1 = el.__transferDomData
@@ -66,11 +66,11 @@ const directive = {
       parentNode.replaceChild(home, el)
       // append to target
       getTarget(value).appendChild(el)
-      el.__transferDomData = Object.assign({}, el.__transferDomData, {hasMovedOut: true, target: getTarget(value)})
+      el.__transferDomData = Object.assign({}, el.__transferDomData, { hasMovedOut: true, target: getTarget(value) })
     } else if (hasMovedOut && value === false) {
       // previously moved, coming back home
       parentNode.replaceChild(el, home)
-      el.__transferDomData = Object.assign({}, el.__transferDomData, {hasMovedOut: false, target: getTarget(value)})
+      el.__transferDomData = Object.assign({}, el.__transferDomData, { hasMovedOut: false, target: getTarget(value) })
     } else if (value) {
       // already moved, going somewhere else
       getTarget(value).appendChild(el)

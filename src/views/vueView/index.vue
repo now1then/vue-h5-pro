@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/images/logo.png" />
+    <img alt="Vue logo" src="~@/assets/images/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -10,7 +10,7 @@
 import HelloWorld from '@/component_modules/HelloWorld.vue'
 
 export default {
-  name: 'home',
+  name: 'page-vue-view',
   components: {
     HelloWorld
   },
@@ -55,8 +55,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-// @import "~@/assets/less/variables.less";
- .home {
-   color: @color;
- }
+
 </style>

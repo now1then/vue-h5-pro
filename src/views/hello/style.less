@@ -1,23 +1,94 @@
-// @import "~variable";
-// @import "~mixins";
 
 .page-hello {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  .demo {
-    text-align: left;
-    padding-top: 25px;
-    width: 790px;
-    margin: 0 auto;
-  }
-  h3 {
-    padding-left: 5px;
-    font-size: 24px;
-  }
-  ul {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .page-content {
     padding: 10px;
+    background: @colorBg;
+  }
+  .msg-area {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 4px 0px rgba(128, 100, 100, 0.2);
+
+  }
+  .msg-title {
+    font-size: 24px;
+    padding: 10px;
+  }
+  .user-desc {
+    padding: 10px;
+  }
+  .icons-link {
+    color: @colorBlueMain;
+    margin: 10px 0;
+    .iconfont {
+      font-size: 20px;
+      padding-right: 20px;
+    }
+    .iconRN-edit {
+      color: #f8774b;
+    }
+    .iconRN-yuque {
+      color: #60d27d;
+    }
+    .iconRN-git {
+      color: #424242;
+    }
+  }
+  .app-name {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 8px;
+  }
+  .iconRN-recommend {
+    font-size: 24px;
+    color: @colorRed;
+  }
+  .time-area {
+    padding: 20px 0 10px;
+    font-weight: bold;
+    .time {
+      font-weight: normal;
+      color: @colorBlueText;
+    }
+  }
+
+  .urls-area {
+    text-align: left;
+    .title {
+      font-size: 18px;
+      padding: 10px;
+      font-weight: bold;
+    }
+  }
+  .list-ul {
+    margin-left: 20px;
+    padding: 10px;
+    list-style: circle;
+    .list-li {
+      margin-bottom: 10px;
+    }
+    .url-link {
+      color: @colorBlueLight;
+      padding: 1px;
+      font-size: 16px;
+      border-bottom: 1px solid #7cd67c;
+    }
+  }
+
+  .user-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: url("~@/assets/images/cat.png");
+    background-size: contain;
+    margin: 20px auto;
+    box-shadow: 0 0 8px 1px #cfa3ef;
+    transition: transform 10s;
+    &:hover {
+      transform: rotate(6turn);
+    }
   }
 }

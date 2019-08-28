@@ -1,11 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <i class="iconfont iconRN-edit"></i>
-    <router-view/>
+    <transition :name="direction">
+      <router-view class="page" />
+    </transition>
   </div>
 </template>
 
@@ -14,22 +11,40 @@ export default {
   name: 'App',
   data() {
     return {
-      appConfig: {},
-      theme: 'theme-blue',
-    }
+    };
   },
   computed: {
+    // 动态设置过渡样式
+    direction: function() {
+      const currentPath = this.$route.path;
+      let local = sessionStorage.getItem('localRoute');
+      let localRoute;
+      try {
+        localRoute = JSON.parse(local);
+      } catch (e) {
+        localRoute = [];
+      }
+      // console.log(localRoute, currentPath);
+      const index = localRoute.indexOf(currentPath);
+      let tranName = '';
+
+      if (index >= 0) {
+        tranName = 'page-back';
+      } else {
+        tranName = 'page-go';
+      }
+      return tranName;
+    }
   },
   watch: {
     $route(to, from) {
-      console.log(to);
-      console.log(from);
-    },
+      // console.log(to);
+      // console.log(from);
+    }
   },
-  created() {
-  },
+  created() {},
   methods: {}
-}
+};
 </script>
 
 <style lang="less">
@@ -38,17 +53,45 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  font-size: 14px;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  color: @colorFont;
+  font-size: @fontSizeH3;
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all 0.2s ease;
+  }
+
+  .fade-enter,
+  .fade-leave-active {
+    opacity: 0;
+  }
+
+  .page {
+    transition: all 0.8s ease-in-out;
+  }
+  .page-go-enter-active {
+    transform: translate3d(100%, 0, 0);
+  }
+  .page-go-enter-to {
+    transform: translate3d(0, 0, 0);
+  }
+  .page-go-leave-active {
+    transform: translate3d(0, 0, 0);
+  }
+  .page-go-leave-to {
+    transform: translate3d(-100%, 0, 0);
+  }
+  .page-back-enter-active {
+    transform: translate3d(-100%, 0, 0);
+  }
+  .page-back-enter-to {
+    transform: translate3d(0, 0, 0);
+  }
+  .page-back-leave-active {
+    transform: translate3d(0, 0, 0);
+  }
+  .page-back-leave-to {
+    transform: translate3d(100%, 0, 0);
   }
 }
 </style>

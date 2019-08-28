@@ -40,7 +40,7 @@ module.exports = {
       }
     }
   },
-  chainWebpack: config => {   // CLI内部webpack配置
+  chainWebpack: config => { // CLI内部webpack配置
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
     types.forEach(type => addStyleResource(config.module.rule('less').oneOf(type)))
   },

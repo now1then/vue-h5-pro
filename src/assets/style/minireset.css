@@ -84,3 +84,8 @@ a:active {
   outline: 0;
   text-decoration: none;
 }
+button,
+input {
+  outline: none;
+  border: none;
+}

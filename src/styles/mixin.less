@@ -1,2 +1,250 @@
 
 // 全局mix函数
+
+// 清除浮动
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 强制换行
+.break-all() {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+// 文字溢出处理
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+//**
+// * @desc 绘制三角形  http://lugolabs.com/caret
+// * @param {String} $position
+// * @param {Number} $caret-width 三角形外宽度
+// * @param {Number} $border-width 三角形内宽度
+// * @param {String} $direction 三角形方向
+// * @param {String} $border-color 边框颜色
+// * @param {String} $background-color 背景颜色
+// */
+.caret(@position, @caret-width, @border-width, @direction, @border-color, @background-color){
+  position: relative;
+
+  &:before,
+  &:after {
+    content:"";
+    position: absolute;
+  }
+  // top
+  & when (@direction = top) {
+    &:before {
+      top:0;
+      left: 0;
+      border-bottom: @caret-width solid @border-color;
+      border-left: @caret-width solid transparent;
+      border-right: @caret-width solid transparent;
+    }
+    &:after {
+      left: @border-width;
+      top: @border-width;
+      border-bottom: (@caret-width - @border-width) solid @background-color;
+      border-left: (@caret-width - @border-width) solid transparent;
+      border-right: (@caret-width - @border-width) solid transparent;
+    }
+  }
+
+  // right
+  & when (@direction = right) {
+    &:before {
+      top:0;
+      left: 0;
+      border-left: @caret-width solid @border-color;
+      border-top: @caret-width solid transparent;
+      border-bottom: @caret-width solid transparent;
+    }
+    &:after {
+      left: 0;
+      top: @border-width;
+      border-left: (@caret-width - @border-width) solid @background-color;
+      border-top: (@caret-width - @border-width) solid transparent;
+      border-bottom: (@caret-width - @border-width) solid transparent;
+    }
+  }
+
+  //  bottom
+  & when (@direction = bottom) {
+    &:before {
+      top:0;
+      left: 0;
+      border-top: @caret-width solid @border-color;
+      border-left: @caret-width solid transparent;
+      border-right: @caret-width solid transparent;
+    }
+    &:after {
+      left: @border-width;
+      top: 0;
+      border-top: (@caret-width - @border-width) solid @background-color;
+      border-left: (@caret-width - @border-width) solid transparent;
+      border-right: (@caret-width - @border-width) solid transparent;
+    }
+  }
+
+  // left
+  & when (@direction = left) {
+    &:before {
+      top:0;
+      left: 0;
+      border-right: @caret-width solid @border-color;
+      border-top: @caret-width solid transparent;
+      border-bottom: @caret-width solid transparent;
+    }
+    &:after {
+      left: @border-width;
+      top: @border-width;
+      border-right: (@caret-width - @border-width) solid @background-color;
+      border-top: (@caret-width - @border-width) solid transparent;
+      border-bottom: (@caret-width - @border-width) solid transparent;
+    }
+  }
+}
+
+
+// * @desc 移动端1px的线 利用伪类+background-image
+.hairline(@position, @color)  {
+  // top
+  & when (@position = top) {
+    &:before {
+      left: 0;
+      top: 0;
+      bottom: auto;
+      right: auto;
+      height: 1Px;
+      width: 100%;
+      .hairline-background-image(@color);
+      background-size: 100% 1Px;
+    }
+  }
+  // left
+  & when (@position = left) {
+    &:before {
+      left: 0;
+      top: 0;
+      bottom: auto;
+      right: auto;
+      width: 1Px;
+      height: 100%;
+      .hairline-background-image(@color);
+      background-size: 1Px 100%;
+    }
+  }
+  // bottom
+  & when (@position = bottom) {
+    &:after {
+      left: 0;
+      bottom: 0;
+      right: auto;
+      top: auto;
+      height: 1Px;
+      width: 100%;
+      .hairline-background-image(@color);
+      background-size: 100% 1Px;
+    }
+  }
+  // right
+  & when (@position = right) {
+    &:after {
+      right: 0;
+      top: 0;
+      left: auto;
+      bottom: auto;
+      width: 1Px;
+      height: 100%;
+      .hairline-background-image(@color);
+      background-size: 1Px 100%;
+    }
+  }
+}
+
+.hairline-background-image(@color) {
+  content: "";
+  position: absolute;
+  display: block;
+  z-index: 15;
+  background-image: linear-gradient(180deg, @color, @color 50%, transparent 50%);
+  background-repeat: no-repeat;
+}
+
+//**
+// * @desc 文本多行文字截断
+// * @param {Number} @lines 行数
+// * @param {Number} @line-height 行高 当@lines=1的时候，@line-height默认传0，相当于截取的字节数
+// */
+.line-clamp(@lines, @line-height: 1.4em) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  & when (@lines = 1) {
+    white-space: nowrap;
+    width: 100% - @line-height;
+  }
+
+  & when not (@lines = 1) {
+    .flexbox();
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: @lines;
+    line-clamp: @lines;
+    line-height: @line-height;
+    max-height: @line-height * @lines;
+  }
+}
+
+// * @desc 文本占位符样式重置
+.placeholder(@color: @input-color-placeholder) {
+  // Firefox
+  &::-moz-placeholder {
+    color: @color;
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+  &:-ms-input-placeholder { color: @color; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
+}
+
+
+/**
+/* @desc 滚动条的样式
+/* ::-webkit-scrollbar 滚动条整体部分
+/* ::-webkit-scrollbar-thumb 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+/* ::-webkit-scrollbar-track 滚动条的轨道（里面装有Thumb）
+/* ::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+/* ::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+/* ::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+/* ::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+ */
+ .scrollbar(@color: #f5f5f5; @width: 16px; @height: 16px) {
+  ///定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸/
+  &::-webkit-scrollbar {
+    width: @width;
+    height: @height;
+    background-color: @color;
+  }
+//  /定义滚动条轨道 内阴影+圆角/
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: @color;
+  }
+
+// /定义滑块 内阴影+圆角/
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+  }
+}
