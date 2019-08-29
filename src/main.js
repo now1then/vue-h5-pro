@@ -5,7 +5,8 @@
 
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
+import router from './routers/';
+import './routers/intercept';
 import store from './stores';
 import * as filters from './filters/';
 import './services';

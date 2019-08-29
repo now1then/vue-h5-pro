@@ -17,21 +17,17 @@ export default {
     // 动态设置过渡样式
     direction: function() {
       const currentPath = this.$route.path;
-      let local = sessionStorage.getItem('localRoute');
-      let localRoute;
-      try {
-        localRoute = JSON.parse(local);
-      } catch (e) {
-        localRoute = [];
-      }
+      const localRoute = (window.myVue && window.myVue.localRoute) || [];
       // console.log(localRoute, currentPath);
       const index = localRoute.indexOf(currentPath);
       let tranName = '';
 
-      if (index >= 0) {
-        tranName = 'page-back';
+      if (localRoute.length === 0) {
+        tranName = 'fade'; // 首页，渐显
+      } else if (index >= 0) {
+        tranName = 'page-back'; // 回退，右划
       } else {
-        tranName = 'page-go';
+        tranName = 'page-go'; // 进入新页面，左划
       }
       return tranName;
     }
@@ -42,7 +38,9 @@ export default {
       // console.log(from);
     }
   },
-  created() {},
+  created() {
+    console.log('欢迎访问...');
+  },
   methods: {}
 };
 </script>
@@ -71,27 +69,35 @@ export default {
   }
   .page-go-enter-active {
     transform: translate3d(100%, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-go-enter-to {
     transform: translate3d(0, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-go-leave-active {
     transform: translate3d(0, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-go-leave-to {
     transform: translate3d(-100%, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-back-enter-active {
     transform: translate3d(-100%, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-back-enter-to {
     transform: translate3d(0, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-back-leave-active {
     transform: translate3d(0, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
   .page-back-leave-to {
     transform: translate3d(100%, 0, 0);
+    // transition: all 0.8s ease-in-out;
   }
 }
 </style>

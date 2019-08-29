@@ -1,5 +1,5 @@
 <template>
-  <section class=" page-hello">
+  <section class="page-hello">
     <div class="page-content">
       <div class="msg-area common-msg-area">
         <p class="msg-title" v-text="msg"></p>
@@ -12,10 +12,18 @@
         <p class="user-desc">欢迎访问本项目，本项目是基于@Vue/CLI3构建的移动端h5项目模板，内容持续完善...</p>
         <p>你的支持是我前进最大的推力！</p>
         <div class="icons-link">
-          <i class="iconfont iconRN-edit"></i>
-          <i class="iconfont iconRN-yuque"></i>
-          <i class="iconfont iconRN-git"></i>
-          <i class="iconfont iconRN-juejin"></i>
+          <a href>
+            <i class="iconfont iconRN-edit"></i>
+          </a>
+          <a href="https://www.yuque.com/nowthen/longroad">
+            <i class="iconfont iconRN-yuque"></i>
+          </a>
+          <a href="https://github.com/now1then/vue-h5-pro">
+            <i class="iconfont iconRN-git"></i>
+          </a>
+          <a href="https://juejin.im/user/5a323f2851882552e652b7ef/posts">
+            <i class="iconfont iconRN-juejin"></i>
+          </a>
         </div>
         <h2 class="time-area">
           现在时间是：
@@ -26,12 +34,14 @@
       <div class="common-msg-area urls-area">
         <h3 class="title">项目页面链接：</h3>
         <ul class="list-ul">
-          <li v-for="item in routerList" :key="item.name" class="list-li">
-            <router-link
-              :to="item.path"
-              class="url-link"
-            >{{(item.meta && item.meta.title) || item.name}}</router-link>
-          </li>
+          <template v-for="item in routerList">
+            <li v-if="item.name" :key="item.name" class="list-li">
+              <router-link
+                :to="item.path"
+                class="url-link"
+              >{{(item.meta && item.meta.title) || item.name}}</router-link>
+            </li>
+          </template>
         </ul>
       </div>
       <main-button btn-text="确定" :btn-disabled="false" @handle-click="handleNext" />

@@ -26,7 +26,7 @@ export default {
           }
         })
         .then(res => {
-          this.pageConfig = res.data
+          this.pageConfig = res.data;
         })
         .finally(() => {})
     },

@@ -17,5 +17,11 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!--手机调试-->
+    <% if (VUE_APP_ERUDA === 'true') { %>
+      <script src="//cdn.bootcss.com/eruda/1.5.2/eruda.min.js"></script>
+      <script> window.eruda.init(); </script>
+    <% } %>
   </body>
+
 </html>

@@ -33,9 +33,7 @@ export default {
 .common-btns {
   padding: 20px 24px;
   .common-btn {
-    //display: block;
     height: 48px;
-    // width: 100%;
     width: 300px;
     border: none;
     color: #fff;
