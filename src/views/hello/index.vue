@@ -44,6 +44,7 @@
           </template>
         </ul>
       </div>
+      <p>点击后tip提示</p>
       <main-button btn-text="确定" :btn-disabled="false" @handle-click="handleNext" />
     </div>
     <base-tip v-model="tip.show" :text="tip.text" :type="tip.type" />
