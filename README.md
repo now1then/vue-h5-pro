@@ -6,10 +6,10 @@
 项目涉及@vue/CLI3构建、移动端h5开发、axios封装、通用化组件等。
 持续更新...
 
-[博客地址：](https://www.yuque.com/nowthen/longroad/gyffxo)
+博客地址：[https://www.yuque.com/nowthen/longroad/gyffxo](https://www.yuque.com/nowthen/longroad/gyffxo)
 
 ### 目录结构
-![](/public/目录结构.png)
+![目录结构](/public/目录结构.png)
 
 ## 构建命令
 ### 初始化依赖配置
