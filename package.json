@@ -9,6 +9,9 @@
     "vue-h5",
     "vue-cli",
     "@vue/CLI3",
+    "vue",
+    "webpack4",
+    "vue-h5-pro",
     "nowthen"
   ],
   "version": "0.1.0",
